@@ -1,0 +1,402 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+ * 디자인 토큰 (Design Tokens)
+ *
+ * 출처: 디자인팀 제공 Figma 컴포넌트 시트
+ *   1차 https://www.figma.com/design/6tJmwTtgZSaqfxpkluwwW3/?node-id=422-2108
+ *   2차 https://www.figma.com/design/6tJmwTtgZSaqfxpkluwwW3/?node-id=589-16137  (2026-08-12)
+ *   ※ 이 노드들만을 유일한 출처로 삼는다. 다른 화면에서 눈으로 딴 색은 토큰이 아니다.
+ *
+ * 구성
+ *   1)   원시 토큰(Primitive) — Figma 색상값. 이 파일 외에서 값을 직접 쓰지 말 것.
+ *   2)   의미 토큰(Semantic)  — 화면에서 실제로 참조할 이름. 역할이 바뀌면 여기만 고친다.
+ *   2-1) 타이포그래피         — 2차 수령분. font 단축속성으로 쓴다.
+ *   3)   사이즈 토큰          — Figma 40/36/32 체계. Element Plus 에 36px 이 없어 별도 정의.
+ *   4)   Element Plus 오버라이드 — 라이브러리 기본 팔레트를 위 토큰으로 교체.
+ *
+ * 원시 토큰 정리 이력 (Figma 변수 30개 → 원시 토큰 24개)
+ *   Figma 변수명은 30개지만 실제 색상값은 27개이고, 그중 3개는 육안 구분이 어려운
+ *   근접색이라 통합했다. 근거는 아래 각 토큰 주석에 표기.
+ *
+ *   ▸ 완전 중복 (값이 100% 동일 — 이름만 둘) : 3건
+ *       #FFFFFF  white/100 = gray/fff
+ *       #000000  black/100 = gray/000
+ *       #2C2C2C  black/222 = txt/grey/222
+ *   ▸ 근접색 흡수 (미세하게 값이 달라짐 — 2026-08-05 디자인팀 승인 완료) : 3건
+ *       #333333 → #2C2C2C   (텍스트 그레이 5단계 → 3단계)
+ *       #A2A2A2 → #9A9A9A
+ *       #DFDFDF → #D2D2D2   (테이블 회색 라인 → 일반 테두리로 통합)
+ *
+ * ⚠️ 이 파일은 PMS/SRM 양쪽에 동일하게 미러링한다(공통 UI 키트와 동일 원칙).
+ *    한쪽만 고치지 말 것. — frontend-ui.md 참조
+ *
+ * ⚠️ import 순서 주의: main.js 에서 반드시 'element-plus/dist/index.css' **뒤에** 불러야
+ *    :root 동일 특이도(specificity)에서 나중 선언이 이겨 오버라이드가 적용된다.
+ * ═══════════════════════════════════════════════════════════════════════════ */
+
+:root {
+  /* ─────────────────────────────────────────────────────────────────────────
+   * 1) 원시 토큰 — 45개
+   *      27개 (1차, 2026-08-05 반영분 포함)
+   *    + 18개 (2차 2026-08-12 — Foundation 계단 11 · 개별 신규 색 7)
+   * ───────────────────────────────────────────────────────────────────────── */
+
+  /* Blue — 브랜드 계열 (4) */
+  --kes-blue-main: #1d4ed8;   /* blue/main  — 기본 브랜드/주요 액션 */
+  --kes-blue-sub: #2563eb;    /* blue/sub   — 보조 강조, hover */
+  --kes-blue-deep: #103a89;   /* blue/deep  — press/active (진한 상태) */
+  --kes-blue-bg1: #f2f8ff;    /* blue/bg1   — 옅은 파랑 배경 */
+
+  /* Text — 블루그레이 계열 (3) */
+  --kes-txt-bluegrey-000: #0f2554;  /* txt/bluegrey/000 — 최심도(제목) */
+  --kes-txt-bluegrey-666: #64748b;  /* txt/bluegrey/666 — 보조 텍스트 */
+  --kes-txt-bluegrey-888: #818892;  /* txt/bluegrey/888 — 약한 보조 */
+
+  /* Text — 그레이 계열 (3) — Figma 5단계에서 근접색 2개 흡수 */
+  --kes-txt-grey-222: #2c2c2c;  /* txt/grey/222 = black/222 — 본문 기본
+                                 *   ※ txt/grey/333(#333333) 흡수 — 육안 구분 불가 */
+  --kes-txt-grey-555: #585858;  /* txt/grey/555 — 본문 약함 */
+  --kes-txt-grey-999: #9a9a9a;  /* txt/grey/999 — placeholder
+                                 *   ※ txt/grey/aaa(#A2A2A2) 흡수 */
+
+  /* Line — 구분선 (3) */
+  --kes-line-ddd: #d2d2d2;             /* line/ddd — 기본 테두리
+                                        *   ※ line/table_grey(#DFDFDF) 흡수 */
+  --kes-line-table-grey: #dfdfdf;      /* line/table_grey — 비활성 체크박스 바탕(1067:41827)에만 쓴다.
+                                        *   테두리는 여전히 line/ddd 로 흡수(2026-09-17 사용자 결정) */
+  --kes-line-table-bluegrey: #c5cee2;  /* line/table_bluegrey — 테이블 헤더/강조 라인
+                                        *   ※ 계열이 달라(블루그레이) 별도 유지 */
+  --kes-line-bluegrey: #e2e8f0;        /* line/bulegrey — 옅은 블루그레이 구분선
+                                        *   ※ Figma 변수명이 'bulegrey' 로 오타. 수정 요청 중이며
+                                        *     확정 시 이 주석과 함께 정리한다 */
+
+  /* Background — 면 (2) */
+  --kes-back-table-th: #f6f9fe;  /* back/table_th — 테이블 헤더·라벨 칸 배경. 2026-09-22 디자이너 리뷰 4차: #f0f3fa → #fbfcff(시안 1138:21410) → #f6f9fe(사용자 조정, 흰 바탕과 구분이 안 돼서) */
+  --kes-back-table-th-calc: #e9e6df; /* 예정가 산출표 머리(베이지) — 산출 구간 강조, 디자이너 의도 확인 2026-09-15(KAN-297) */
+  --kes-back-page: #f8faff;      /* back/default 의 두 번째 값 — 페이지 바탕
+                                  *   ※ Figma 변수에 값이 2개(#FFFFFF, #F8FAFF). 모드 구분인지 확인 중 */
+
+  /* Point — 상태 강조 6색 × (본문색 + 배경색)
+   * 출처: Figma label/table (784:28258) — green·red·orange·purple·yellow·blue
+   * ⚠️ green 은 2026-08-24 에 시안 값(#0eb991/#e8faee)으로 고쳤다. 종전 #00a86d/#dcfce7 은
+   *    Figma 에 없는 값이었다. **PMS 쪽 tokens.css 는 아직 옛 값이다** — 미러링 필요. */
+  --kes-point-green: #0eb991;      /* point/green     — 정상·완료 (라벨 '사용') */
+  --kes-point-green-bg: #e8faee;   /* point/green_bg */
+  --kes-point-green2: #00aa7a;     /* point/green2    — LNB SRM 링크 호버(테두리·글자·아이콘) (디자이너 리뷰 4차 2026-09-22, 1135:106806) */
+  --kes-point-red: #ee485e;        /* point/red       — 오류·중지·삭제 (라벨 '중지') */
+  --kes-point-red-bg: #ffebeb;     /* point/red_bg */
+  --kes-point-orange: #ff721a;     /* point/orange    — 진행중 (라벨 '추진') */
+  --kes-point-orange-bg: #ffefe5;  /* point/orange_bg */
+  --kes-point-yellow: #b87800;     /* point/yellow    — 주의 (Figma Variant5) */
+  --kes-point-yellow-bg: #fffdcf;  /* point/yellow_bg */
+  --kes-point-purple: #9e29eb;     /* point/purple    — 보조 강조 (Figma Variant4) */
+  --kes-point-purple-bg: #f0daff;  /* point/purple_bg */
+  /* blue 배지는 전용 point 토큰이 없다 — 시안이 blue/Secondary + Foundation/Blue/blue-50 을 쓴다 */
+  --kes-point-blue: #2563eb;       /* = blue/Secondary */
+  --kes-point-blue-bg: #e3f4ff;    /* = Foundation/Blue/blue-50 */
+
+  /* 무채색 (2) — Figma: white/100 = gray/fff, black/100 = gray/000 */
+  --kes-white: #ffffff;
+  --kes-black: #000000;
+
+  /* ── 2026-08-12 수령분 (Figma 589:16137) ───────────────────────────────── */
+
+  /* Foundation 색 계단 (11) — 갭 목록 §3 "회색·블루그레이 단계 부족" 대응분.
+   *   기존 3단(#2c2c2c·#585858·#9a9a9a / #0f2554·#64748b·#818892)만으로는
+   *   배경·보더용 옅은 단계가 없어 화면마다 임의값을 만들어 쓰고 있었다.
+   *   ※ 하드코딩으로 쓰던 #94a3b8 → blue-300, #4b6083 → blue-600 으로 대체 가능하다. */
+  --kes-grey-50: #f4f4f4;        /* Foundation/Grey/grey-50 */
+  --kes-grey-100: #dcdcdc;       /* Foundation/Grey/grey-100 */
+  --kes-grey-200: #cbcbcb;       /* Foundation/Grey/grey-200 */
+  --kes-grey-400: #a5a5a5;       /* Foundation/Grey/grey-400 */
+  --kes-bluegrey-50: #eef2fa;    /* Foundation/BlueGrey/blue-50 */
+  --kes-bluegrey-100: #ccd6e5;   /* Foundation/BlueGrey/blue-100 */
+  --kes-bluegrey-300: #94a2b7;   /* Foundation/BlueGrey/blue-300 */
+  --kes-bluegrey-600: #4b6486;   /* Foundation/BlueGrey/blue-600 */
+  --kes-blue-50: #e3f4ff;        /* Foundation/Blue/blue-50 */
+  --kes-blue-200: #a4ccff;       /* Foundation/Blue/blue-200 */
+  --kes-blue-300: #82b8ff;       /* Foundation/Blue/blue-300 — 버튼 press(line·table) (디자이너 리뷰 4차 2026-09-22) */
+  --kes-blue-800: #102b77;       /* Foundation/Blue/blue-800 */
+
+  /* ── 개발 정의 색 (2026-09-15 토큰 점검) — 시안 라이브러리에 없어 개발이 잡은 값. 디자인팀 확인 대상(design-token-gaps.md §4) ── */
+  --kes-grey-footer: #939ba7;    /* 푸터 저작권 문구 — 시안 푸터 텍스트 색(신규) */
+  --kes-blue-100: #dbeafe;       /* 헤더 시스템 뱃지(PMS) 배경 — Foundation/Blue 50(#e3f4ff)·200(#a4ccff) 사이 */
+
+  /* 개별 신규 색 (7) */
+  --kes-blue-bg2: #dae8ff;          /* blue/bg2        — 진한 옅은 파랑(선택 상태 등) */
+  --kes-blue-bg3: #ecf2fd;          /* blue/bg3        — 표 안 버튼(design=table) 바탕 (디자이너 리뷰 4차 2026-09-22, 1135:81444) */
+  --kes-blue-bg-lnb: #f2f5fa;       /* blue/bg_lnb     — LNB 바탕 */
+  --kes-back-table-hover: #ffffef;  /* back/table_hover — 표 행 hover */
+  --kes-back-table-total: #f8f8f8;  /* back/table_total — 표 합계 행 */
+  --kes-back-guide: #eef1f9;        /* back/guide      — (구) 안내 박스 바탕. 2026-09-22 디자이너 리뷰 4차(1138:21413)부터 안내 박스는 blue/bg4 + blue-100 테두리 */
+  --kes-blue-bg4: #f6faff;          /* blue/bg4        — 안내(가이드) 박스 바탕 */
+  --kes-line-guide: #c0e1ff;        /* Foundation/Blue/blue-100 — 안내 박스 테두리. ⚠️ --kes-blue-100(#dbeafe) 은 개발 정의 뱃지 색이라 이름을 달리 둔다 */
+  --kes-line-ededed: #ededed;       /* line/ededed     — 가장 옅은 구분선 */
+  --kes-line-btn-bluegrey: #c0ceeb; /* line/btn_bluegrey — 표 안 버튼(design=table) 테두리 */
+  --kes-txt-grey-666: #6b6b6b;      /* txt/grey/666    — 본문 회색 추가 단계
+                                     *   ⚠️ 2026-08-05 근접색 통합(5단→3단) 합의와 방향이 어긋난다.
+                                     *      Figma 에는 흡수했던 #333333·#A2A2A2·#DFDFDF 도 그대로 남아 있다.
+                                     *      통합 취소인지 Figma 미정리인지 디자인팀 회신 대기 중(KAN-161). */
+
+  /* ─────────────────────────────────────────────────────────────────────────
+   * 2) 의미 토큰 — 화면에서는 이 이름만 사용한다
+   * ───────────────────────────────────────────────────────────────────────── */
+
+  /* 브랜드 */
+  --kes-color-primary: var(--kes-blue-main);
+  --kes-color-primary-hover: var(--kes-blue-sub);
+  --kes-color-primary-active: var(--kes-blue-deep);
+  --kes-color-primary-bg: var(--kes-blue-bg1);
+
+  /* 상태 — 본문색/배경색 쌍. 라벨·배지·알림에 함께 사용한다.
+   *   예) .label { color: var(--kes-color-success); background: var(--kes-color-success-bg); } */
+  --kes-color-success: var(--kes-point-green);
+  --kes-color-success-bg: var(--kes-point-green-bg);
+  --kes-color-danger: var(--kes-point-red);
+  --kes-color-danger-bg: var(--kes-point-red-bg);
+  --kes-color-progress: var(--kes-point-orange);       /* 진행중(추진) */
+  --kes-color-progress-bg: var(--kes-point-orange-bg);
+  --kes-color-warning: var(--kes-point-yellow);        /* 주의 */
+  --kes-color-warning-bg: var(--kes-point-yellow-bg);
+  --kes-color-accent: var(--kes-point-purple);         /* 보조 강조 */
+  --kes-color-accent-bg: var(--kes-point-purple-bg);
+  --kes-color-info: var(--kes-point-blue);             /* 안내·확정 */
+  --kes-color-info-bg: var(--kes-point-blue-bg);
+
+  /* 텍스트 위계 (강함 → 약함)
+   *   ※ 이전 --kes-text-emphasis 는 --kes-text-body 와 값이 같아져 삭제했다. body 를 쓸 것. */
+  --kes-text-strong: var(--kes-txt-bluegrey-000);    /* 화면 제목 */
+  --kes-text-body: var(--kes-txt-grey-222);          /* 본문 기본 */
+  --kes-text-muted: var(--kes-txt-grey-555);         /* 본문 약함 */
+  --kes-text-secondary: var(--kes-txt-bluegrey-666); /* 보조 설명 */
+  --kes-text-tertiary: var(--kes-txt-bluegrey-888);  /* 최약 보조(캡션·메타) */
+  --kes-text-placeholder: var(--kes-txt-grey-999);
+  --kes-text-footer: var(--kes-grey-footer);          /* 푸터 저작권 (개발 정의) */
+  --kes-badge-pms-bg: var(--kes-blue-100);            /* 헤더 시스템 뱃지 PMS 배경 (개발 정의) — SRM 은 point/green-bg */
+  --kes-text-disabled: var(--kes-txt-grey-999);      /* placeholder 와 동일 값(근접색 통합 결과) */
+  --kes-text-inverse: var(--kes-white);              /* 진한 배경 위 텍스트 */
+
+  /* 테두리
+   *   ※ 이전 --kes-border-table 은 --kes-border 로 통합했다(#DFDFDF → #D2D2D2). */
+  --kes-border: var(--kes-line-ddd);
+  --kes-border-table-accent: var(--kes-line-table-bluegrey);
+
+  /* 배경 */
+  --kes-bg-base: var(--kes-white);
+  --kes-bg-accent: var(--kes-blue-bg1);
+  --kes-bg-page: var(--kes-back-page);          /* 화면 바탕 (카드 밖) */
+  --kes-bg-table-head: var(--kes-back-table-th); /* 테이블 헤더 */
+  --kes-bg-table-head-calc: var(--kes-back-table-th-calc); /* 예정가 산출표 머리(베이지) */
+
+  /* 테두리 — 옅은 구분선 (섹션 구분·표 내부선) */
+  --kes-border-subtle: var(--kes-line-bluegrey);
+
+  /* ─────────────────────────────────────────────────────────────────────────
+   * 2-1) 타이포그래피 — Figma 589:16137 (2026-08-12 수령)
+   *
+   *   갭 목록 §2 의 "폰트 크기·굵기 축 자체가 없음" 에 대한 수령분이다.
+   *   그전까지 화면마다 임의 크기를 써서 본문이 13px·14px 로 갈려 있었다.
+   *
+   *   ▸ 쓰는 법 — 역할 토큰을 font 단축속성에 그대로 넣는다.
+   *       .page-title { font: var(--kes-font-h1); }
+   *       .data-table th { font: var(--kes-font-table-th); }
+   *     부분만 필요하면 아래 원시 축(--kes-fs-*, --kes-fw-*)을 쓴다.
+   *
+   *   ⚠️ font 단축속성은 지정하지 않은 폰트 속성(font-variant 등)을 초기화한다.
+   *      letter-spacing 은 단축속성에 포함되지 않으므로 표 본문은 별도 지정한다.
+   *
+   *   ⚠️ 확인 대기 (KAN-161) — Figma 값이 lineHeight: 100 이다. 100% 로 해석했는데,
+   *      한글은 행간 100% 에서 여러 줄이 되면 디센더가 붙는다. 다행 텍스트가 있는
+   *      곳은 확인 회신 전까지 line-height 를 개별 지정할 것.
+   * ───────────────────────────────────────────────────────────────────────── */
+
+  --kes-font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif;
+
+  /* 원시 축 — 크기 5단 / 굵기 3단 */
+  --kes-fs-24: 24px;
+  --kes-fs-20: 20px;
+  --kes-fs-16: 16px;   /* Figma con/P9_16M — 축에 없어 px 로 쓰던 값(design-token-gaps §2), 2026-09-03 추가 */
+  --kes-fs-15: 15px;
+  --kes-fs-14: 14px;
+  --kes-fs-13: 13px;
+  --kes-fw-bold: 700;
+  --kes-fw-medium: 500;
+  --kes-fw-regular: 400;
+  --kes-lh-tight: 1;   /* Figma lineHeight 100 = 100% */
+
+  /* 제목 — tit/h1 · h2 · h3 · h3_tip */
+  --kes-font-h1: var(--kes-fw-bold) var(--kes-fs-24) / var(--kes-lh-tight) var(--kes-font-family);
+  --kes-font-h2: var(--kes-fw-bold) var(--kes-fs-20) / var(--kes-lh-tight) var(--kes-font-family);
+  --kes-font-h3: var(--kes-fw-bold) var(--kes-fs-15) / var(--kes-lh-tight) var(--kes-font-family);
+  /* Figma tit/h3_tip 은 15 **Medium** 이다 — 처음에 Regular 로 잘못 옮겼다(2026-09-03 정정, KAN-241) */
+  --kes-font-h3-tip: var(--kes-fw-medium) var(--kes-fs-15) / var(--kes-lh-tight) var(--kes-font-family);
+
+  /* 본문 — con/P*. 14px·13px 두 축이 공존하는 것이 의도된 체계다(디자인 확인 완료).
+   *   ※ Figma 변수 번호가 P1·P2·P5·P6·P8 로 결번이다. 누락 여부 확인 중(KAN-161). */
+  --kes-font-body-16b: var(--kes-fw-bold) var(--kes-fs-16) / var(--kes-lh-tight) var(--kes-font-family);
+  --kes-font-body-16m: var(--kes-fw-medium) var(--kes-fs-16) / var(--kes-lh-tight) var(--kes-font-family);
+  --kes-font-body-14b: var(--kes-fw-bold) var(--kes-fs-14) / var(--kes-lh-tight) var(--kes-font-family);
+  --kes-font-body-14m: var(--kes-fw-medium) var(--kes-fs-14) / var(--kes-lh-tight) var(--kes-font-family);
+  --kes-font-body-13b: var(--kes-fw-bold) var(--kes-fs-13) / var(--kes-lh-tight) var(--kes-font-family);
+  --kes-font-body-13m: var(--kes-fw-medium) var(--kes-fs-13) / var(--kes-lh-tight) var(--kes-font-family);
+  --kes-font-body-13r: var(--kes-fw-regular) var(--kes-fs-13) / var(--kes-lh-tight) var(--kes-font-family);
+
+  /* 버튼 — 사이즈 토큰(--kes-size-*)과 짝을 이룬다. 40/36/32/28 */
+  --kes-font-btn-40: var(--kes-fw-bold) var(--kes-fs-14) / var(--kes-lh-tight) var(--kes-font-family);
+  --kes-font-btn-36: var(--kes-fw-medium) var(--kes-fs-14) / var(--kes-lh-tight) var(--kes-font-family);
+  --kes-font-btn-32: var(--kes-fw-medium) var(--kes-fs-14) / var(--kes-lh-tight) var(--kes-font-family);
+  --kes-font-btn-28: var(--kes-fw-regular) var(--kes-fs-13) / var(--kes-lh-tight) var(--kes-font-family);
+
+  /* 표 — table/th · table/td · filter/th */
+  --kes-font-table-th: var(--kes-fw-medium) var(--kes-fs-14) / var(--kes-lh-tight) var(--kes-font-family);
+  --kes-font-table-td: var(--kes-fw-regular) var(--kes-fs-14) / var(--kes-lh-tight) var(--kes-font-family);
+  --kes-font-filter-th: var(--kes-fw-bold) var(--kes-fs-14) / var(--kes-lh-tight) var(--kes-font-family);
+
+  /* 표 본문 자간 — Figma letterSpacing: -1 (font 단축속성에 못 들어가 별도 토큰)
+   *   단위는 **%** 다. Input 컴포넌트(589:16300)가 14px 텍스트에 tracking -0.14px
+   *   으로 내려오는데 이는 14 × -1% 다 — px 였다면 -1px 로 나왔을 것이다.
+   *   em 으로 두면 폰트 크기가 바뀌어도 비율이 유지된다. */
+  --kes-ls-tight: -0.01em;   /* = -1% */
+  --kes-ls-table-td: var(--kes-ls-tight);
+
+  /* ─────────────────────────────────────────────────────────────────────────
+   * 3) 사이즈 토큰 — Figma btn/Input 체계
+   *    Element Plus 기본은 large 40 / default 32 / small 24 로 36px 이 없다.
+   *    36px 이 필요한 곳은 .kes-size-36 유틸리티(파일 하단)를 함께 쓴다.
+   * ───────────────────────────────────────────────────────────────────────── */
+  --kes-size-lg: 40px;  /* Figma size=primary */
+  --kes-size-md: 36px;  /* Figma size=36 — Element Plus 미지원 */
+  --kes-size-sm: 32px;  /* Figma size=32 */
+  /* 알약(pill) 모서리 — 상태 뱃지·기간 칩·알약 탭처럼 높이의 절반 이상이면 모양이 같은 곳.
+     화면마다 99/100/999/9999 로 갈려 있던 것을 하나로(개발 정의, 2026-09-15 토큰 점검 §4). 시안의 radius 축이 오면 값만 바꾼다 */
+  --kes-radius-pill: 999px;
+
+  /* ─────────────────────────────────────────────────────────────────────────
+   * 4) Element Plus 오버라이드
+   *    라이브러리가 :root 에 정의한 변수를 위 토큰으로 덮어쓴다.
+   * ───────────────────────────────────────────────────────────────────────── */
+
+  /* 브랜드 색 — dark-2(press)는 Figma blue/deep 을 그대로 사용 */
+  --el-color-primary: var(--kes-color-primary);
+  --el-color-primary-dark-2: var(--kes-color-primary-active);
+  /* light-N: 브랜드색을 흰색과 N0% 혼합한 값 (Element Plus 규칙에 맞춰 산출) */
+  --el-color-primary-light-3: #6183e4;
+  --el-color-primary-light-5: #8ea7ec;
+  --el-color-primary-light-7: #bbcaf3;
+  --el-color-primary-light-8: #d2dcf7;
+  --el-color-primary-light-9: var(--kes-color-primary-bg);
+
+  /* 상태 색 — light-9(연한 배경)까지 Figma point *_bg 로 대응시킨다.
+   * warning 은 종전 Element Plus 기본값(#E6A23C)을 쓰던 것을 Figma point/yellow 로 확정. */
+  --el-color-danger: var(--kes-color-danger);
+  --el-color-danger-light-9: var(--kes-color-danger-bg);
+  --el-color-error: var(--kes-color-danger);
+  --el-color-error-light-9: var(--kes-color-danger-bg);
+  --el-color-success: var(--kes-color-success);
+  --el-color-success-light-9: var(--kes-color-success-bg);
+  --el-color-warning: var(--kes-color-warning);
+  --el-color-warning-light-9: var(--kes-color-warning-bg);
+  --el-color-info: var(--kes-txt-bluegrey-888);
+
+  /* 텍스트 */
+  --el-text-color-primary: var(--kes-text-strong);
+  --el-text-color-regular: var(--kes-text-body);
+  --el-text-color-secondary: var(--kes-text-secondary);
+  --el-text-color-placeholder: var(--kes-text-placeholder);
+  --el-text-color-disabled: var(--kes-text-disabled);
+
+  /* 테두리 — light 는 통합으로 base 와 같은 값이 된다 */
+  --el-border-color: var(--kes-border);
+  --el-border-color-light: var(--kes-border);
+  --el-border-color-lighter: var(--kes-border-table-accent);
+
+  /* 배경 */
+  --el-bg-color: var(--kes-bg-base);
+  --el-fill-color-blank: var(--kes-bg-base);
+  --el-fill-color-light: var(--kes-bg-accent);
+
+  /* ⚠️ 테이블(--el-table-*) 은 여기(:root)에 두면 적용되지 않는다. 아래 별도 블록 참조. */
+
+  /* 컴포넌트 높이 — 시안의 입력 기본은 **36** 이다(Input 시트 589:16300 · 검색영역 609:21607).
+     예전에는 32 로 두고 36 이 필요한 곳만 .kes-size-36 을 붙이기로 했는데, 실제로는
+     아무 데도 붙지 않아 **화면 전체가 32** 였다. 기본을 36 으로 올리고, 32 가 맞는 곳
+     (목록 위 '10개씩' — 시안 842:28850)만 .kes-size-32 로 되돌린다.
+     ※ 버튼은 button.css 가 높이를 직접 지정하므로 이 값에 영향받지 않는다. */
+  --el-component-size-large: var(--kes-size-lg);
+  --el-component-size: var(--kes-size-md);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+ * 36px 사이즈 유틸리티
+ *
+ * Element Plus 의 el-button/el-input 은 높이를 --el-component-size 에서 가져온다.
+ * 해당 변수를 지역 스코프에서 덮어써 36px 을 만든다.
+ *
+ * 사용 예)
+ *   <el-button class="kes-size-36">저장</el-button>
+ *   <div class="kes-size-36"><el-input /><el-select /></div>  ← 영역 단위 적용
+ *
+ * ※ 개별 컴포넌트 래퍼는 KAN-120(btn·Input 공통 컴포넌트)에서 만든다.
+ *    이 유틸리티는 그때까지의 임시 수단이자 래퍼 내부 구현 기반이다.
+ * ═══════════════════════════════════════════════════════════════════════════ */
+.kes-size-36 {
+  --el-component-size: var(--kes-size-md);
+}
+
+/* 32px 로 되돌리는 유틸리티 — 기본이 36 이 되면서 필요해졌다.
+   지금 쓰는 곳은 목록 위 페이지 크기 선택('10개씩') 한 곳이다(시안 842:28850 의 120×32). */
+.kes-size-32 {
+  --el-component-size: var(--kes-size-sm);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+ * 표(el-table) — 표 머리는 목록 그리드(plugins/agGrid.js)와 **같은 값**이다: 블루그레이 배경 + 검정 Medium 14
+ * (Figma 842:28853). 예전 V0 기준(남색 Bold)은 2026-09-15 에 걷어냈다 — 표 머리 스타일은 하나다.
+ * Element Plus 기본값은 흰 배경 + 회색 글씨라 교체한다.
+ *
+ * ⚠️ **이 변수들은 :root 에 두면 적용되지 않는다.**
+ *    Element Plus 는 `.el-table` 선택자 자체에서 다시 선언한다 —
+ *      .el-table { --el-table-header-bg-color: var(--el-fill-color-blank); ... }
+ *    변수는 선언된 요소를 기준으로 상속되므로, `.el-table` 의 로컬 선언이
+ *    :root 값을 가린다. 같은 선택자(.el-table)에 선언해야 이긴다
+ *    (특이도가 같으면 나중 선언이 이기고, tokens.css 는 element-plus 뒤에 로드된다).
+ *
+ *    :root 에 넣어 두면 "변수 값은 맞는데 화면 색은 그대로"인 상태가 되어
+ *    원인을 찾기 어렵다 — 실제로 한 번 겪었다.
+ *
+ * ⚠️ 개별 화면에서 :header-cell-style 을 넘기지 말 것. 화면마다 값을 적으면
+ *    새로 만드는 화면이 다시 어긋난다 — 시안 대조에서 실제로 발생했던 문제다.
+ * ═══════════════════════════════════════════════════════════════════════════ */
+.el-table {
+  --el-table-header-bg-color: var(--kes-bg-table-head);
+  --el-table-header-text-color: var(--kes-black);
+  --el-table-text-color: var(--kes-text-body);
+  --el-table-border-color: var(--kes-border-table-accent);
+}
+
+/* 굵기는 변수로 표현할 수 없어 규칙으로 둔다 — AG Grid 헤더(500)와 동일 */
+.el-table th.el-table__cell {
+  font-weight: var(--kes-fw-medium);
+}
+
+/* ═══ 모션 토큰 (KAN-325, 2026-09-22) ═══════════════════════════════════════
+   지속시간이 파일마다 0.12·0.15·0.18·0.2 로 제각각이었다. 세 단계로 통일한다 —
+   fast 0.12s(누름·행 hover·닫힘) · base 0.18s(hover·포커스·열림) · slow 0.3s(넓은 전환).
+   스피너는 0.8s 하나. 이징은 ease 하나(들어오는 것은 ease-out, 나가는 것은 ease-in 을 명시).
+   [COMMON] PMS·SRM 미러링. */
+:root {
+  --kes-dur-fast: 0.12s;
+  --kes-dur-base: 0.18s;
+  --kes-dur-slow: 0.3s;
+  --kes-dur-spin: 0.8s;
+  --kes-ease: ease;
+}
+/* 움직임 줄이기 설정 사용자 — 모든 전환·애니메이션을 사실상 끈다(0.01ms 로 두면 transitionend 는 그대로 온다).
+   파일마다 @media 블록을 반복하지 않도록 여기 한 번만 둔다. */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

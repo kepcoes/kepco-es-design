@@ -1,0 +1,567 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>켑코이에스 디자인/퍼블리싱 가이드</title>
+  <meta name="description" content="켑코이에스 전산시스템(PMS·SRM) 재구축 — 디자인 토큰 기준의 화면 예시 갤러리" />
+  <link rel="icon" href="assets/ci-kepco-es.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/tokens.css" />
+  <link rel="stylesheet" href="css/guide.css" />
+</head>
+<body>
+  <header class="top">
+    <div class="top__inner">
+      <a class="top__brand" href="./" title="켑코이에스(주)">
+        <img src="assets/ci-kepco-es.png" alt="KEPCO ES" class="top__logo" />
+        <span class="top__title">디자인/퍼블리싱 가이드</span>
+      </a>
+      <nav class="crumb" aria-label="현재 위치"><span>홈</span><span class="crumb__sep">&gt;</span><span class="crumb__now">디자인/퍼블리싱 가이드</span></nav>
+    </div>
+  </header>
+
+  <main class="main">
+    <section class="toolbar" aria-label="보기 설정">
+      <div class="toolbar__guide">
+        <strong>화면 배치 편집</strong>
+        <span>카드의 이동 핸들(⋮⋮)을 드래그하거나 Alt+방향키로 옮긴 뒤 [배치 저장]을 누르세요. 이 브라우저에만 저장됩니다.</span>
+      </div>
+      <div class="toolbar__right">
+        <div class="seg" role="tablist" aria-label="시스템 필터">
+          <button type="button" class="seg__btn is-on" data-filter="ALL" role="tab" aria-selected="true">전체</button>
+          <button type="button" class="seg__btn" data-filter="PMS" role="tab" aria-selected="false">PMS</button>
+          <button type="button" class="seg__btn" data-filter="SRM" role="tab" aria-selected="false">SRM</button>
+        </div>
+        <span class="toolbar__status" id="layoutStatus" role="status" aria-live="polite"></span>
+        <button type="button" class="btn btn--primary" id="layoutSave">배치 저장</button>
+        <button type="button" class="btn" id="layoutReset">기본 배치</button>
+      </div>
+    </section>
+
+    <p class="note">
+      각 화면은 개발 중인 실제 화면을 <b>시연 모드(모의 데이터)</b>로 연 것입니다 — 회사·사업·금액은 가상이며 저장 내용은 새로고침하면 사라집니다.
+      화면 안에서 다른 메뉴로 자유롭게 이동할 수 있습니다. 시연 계정: PMS <code>demo-user</code>·<code>demo-admin</code>, SRM <code>demo-contract</code>(계약담당자)·<code>demo-business</code>(사업담당자)·<code>demo-admin</code>(관리자)·<code>2148130217</code>(협력업체).
+    </p>
+
+    <div class="grid" id="grid">
+      <article class="card" data-system="SRM" data-card-id="srm-login">
+        <a class="card__thumb" href="dist/srm-demo.html#/login" target="_blank" rel="noopener" title="SRM 로그인 열기">
+          <img src="assets/thumbnails/srm-login.png" alt="SRM 로그인 썸네일" loading="lazy" />
+        </a>
+        <div class="card__body">
+          <div class="card__head">
+            <span class="badge badge--srm">SRM</span>
+            <h2 class="card__title">SRM 로그인</h2>
+          </div>
+          <p class="card__desc">로그인 화면 예시 — 진행 중 입찰공고 슬라이드·협력업체 창구 진입</p>
+          <a class="btn btn--primary card__open" href="dist/srm-demo.html#/login" target="_blank" rel="noopener">
+            새 창으로 열기
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          </a>
+        </div>
+      </article>
+      <article class="card" data-system="SRM" data-card-id="srm-partner-signup">
+        <a class="card__thumb" href="dist/srm-demo.html#/partner/signup" target="_blank" rel="noopener" title="협력업체 신청 등록 열기">
+          <img src="assets/thumbnails/srm-partner-signup.png" alt="협력업체 신청 등록 썸네일" loading="lazy" />
+        </a>
+        <div class="card__body">
+          <div class="card__head">
+            <span class="badge badge--srm">SRM</span>
+            <h2 class="card__title">협력업체 신청 등록</h2>
+          </div>
+          <p class="card__desc">절차별 입력 화면 예시 — 5단계 STEP·약관 동의·서류 첨부</p>
+          <a class="btn btn--primary card__open" href="dist/srm-demo.html#/partner/signup" target="_blank" rel="noopener">
+            새 창으로 열기
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          </a>
+        </div>
+      </article>
+      <article class="card" data-system="PMS" data-card-id="pms-receipt-new">
+        <a class="card__thumb" href="dist/pms-demo.html#/login?as=demo-user&redirect=/receipt/new" target="_blank" rel="noopener" title="신규 프로젝트 등록 열기">
+          <img src="assets/thumbnails/pms-receipt-new.png" alt="신규 프로젝트 등록 썸네일" loading="lazy" />
+        </a>
+        <div class="card__body">
+          <div class="card__head">
+            <span class="badge badge--pms">PMS</span>
+            <h2 class="card__title">신규 프로젝트 등록</h2>
+          </div>
+          <p class="card__desc">3단계 모달 입력 화면 예시</p>
+          <a class="btn btn--primary card__open" href="dist/pms-demo.html#/login?as=demo-user&redirect=/receipt/new" target="_blank" rel="noopener">
+            새 창으로 열기
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          </a>
+        </div>
+      </article>
+      <article class="card" data-system="PMS" data-card-id="pms-receipt-promotion">
+        <a class="card__thumb" href="dist/pms-demo.html#/login?as=demo-user&redirect=/receipt/promotion" target="_blank" rel="noopener" title="추진단계 프로젝트 현황 열기">
+          <img src="assets/thumbnails/pms-receipt-promotion.png" alt="추진단계 프로젝트 현황 썸네일" loading="lazy" />
+        </a>
+        <div class="card__body">
+          <div class="card__head">
+            <span class="badge badge--pms">PMS</span>
+            <h2 class="card__title">추진단계 프로젝트 현황</h2>
+          </div>
+          <p class="card__desc">검색/조회 화면 예시 — 조회 조건·목록·엑셀</p>
+          <a class="btn btn--primary card__open" href="dist/pms-demo.html#/login?as=demo-user&redirect=/receipt/promotion" target="_blank" rel="noopener">
+            새 창으로 열기
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          </a>
+        </div>
+      </article>
+      <article class="card" data-system="PMS" data-card-id="pms-project-list">
+        <a class="card__thumb" href="dist/pms-demo.html#/login?as=demo-user&redirect=/project" target="_blank" rel="noopener" title="프로젝트 현황 열기">
+          <img src="assets/thumbnails/pms-project-list.png" alt="프로젝트 현황 썸네일" loading="lazy" />
+        </a>
+        <div class="card__body">
+          <div class="card__head">
+            <span class="badge badge--pms">PMS</span>
+            <h2 class="card__title">프로젝트 현황</h2>
+          </div>
+          <p class="card__desc">검색/조회 화면 예시 — 27컬럼 목록·컬럼 고정·페이징</p>
+          <a class="btn btn--primary card__open" href="dist/pms-demo.html#/login?as=demo-user&redirect=/project" target="_blank" rel="noopener">
+            새 창으로 열기
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          </a>
+        </div>
+      </article>
+      <article class="card" data-system="PMS" data-card-id="pms-project-home">
+        <a class="card__thumb" href="dist/pms-demo.html#/login?as=demo-user&redirect=/project/1" target="_blank" rel="noopener" title="프로젝트 상세 HOME 열기">
+          <img src="assets/thumbnails/pms-project-home.png" alt="프로젝트 상세 HOME 썸네일" loading="lazy" />
+        </a>
+        <div class="card__body">
+          <div class="card__head">
+            <span class="badge badge--pms">PMS</span>
+            <h2 class="card__title">프로젝트 상세 HOME</h2>
+          </div>
+          <p class="card__desc">상세 홈 화면 예시 — 진행단계 탭·투자/상환 도넛·이력</p>
+          <a class="btn btn--primary card__open" href="dist/pms-demo.html#/login?as=demo-user&redirect=/project/1" target="_blank" rel="noopener">
+            새 창으로 열기
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          </a>
+        </div>
+      </article>
+      <article class="card" data-system="PMS" data-card-id="pms-project-promotion">
+        <a class="card__thumb" href="dist/pms-demo.html#/login?as=demo-user&redirect=/project/1/promotion" target="_blank" rel="noopener" title="프로젝트 정보 입력(추진) 열기">
+          <img src="assets/thumbnails/pms-project-promotion.png" alt="프로젝트 정보 입력(추진) 썸네일" loading="lazy" />
+        </a>
+        <div class="card__body">
+          <div class="card__head">
+            <span class="badge badge--pms">PMS</span>
+            <h2 class="card__title">프로젝트 정보 입력(추진)</h2>
+          </div>
+          <p class="card__desc">정보입력 화면 예시 — 5스텝·플로팅 액션바·조회 팝업</p>
+          <a class="btn btn--primary card__open" href="dist/pms-demo.html#/login?as=demo-user&redirect=/project/1/promotion" target="_blank" rel="noopener">
+            새 창으로 열기
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          </a>
+        </div>
+      </article>
+      <article class="card" data-system="PMS" data-card-id="pms-sales-contract">
+        <a class="card__thumb" href="dist/pms-demo.html#/login?as=demo-user&redirect=/contract/sales/list" target="_blank" rel="noopener" title="수주계약 현황 열기">
+          <img src="assets/thumbnails/pms-sales-contract.png" alt="수주계약 현황 썸네일" loading="lazy" />
+        </a>
+        <div class="card__body">
+          <div class="card__head">
+            <span class="badge badge--pms">PMS</span>
+            <h2 class="card__title">수주계약 현황</h2>
+          </div>
+          <p class="card__desc">검색/조회 화면 예시 — 기간 기준 선택·목록</p>
+          <a class="btn btn--primary card__open" href="dist/pms-demo.html#/login?as=demo-user&redirect=/contract/sales/list" target="_blank" rel="noopener">
+            새 창으로 열기
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          </a>
+        </div>
+      </article>
+      <article class="card" data-system="PMS" data-card-id="pms-stats">
+        <a class="card__thumb" href="dist/pms-demo.html#/login?as=demo-user&redirect=/stats/summary" target="_blank" rel="noopener" title="통계 종합 열기">
+          <img src="assets/thumbnails/pms-stats.png" alt="통계 종합 썸네일" loading="lazy" />
+        </a>
+        <div class="card__body">
+          <div class="card__head">
+            <span class="badge badge--pms">PMS</span>
+            <h2 class="card__title">통계 종합</h2>
+          </div>
+          <p class="card__desc">통계 화면 예시</p>
+          <a class="btn btn--primary card__open" href="dist/pms-demo.html#/login?as=demo-user&redirect=/stats/summary" target="_blank" rel="noopener">
+            새 창으로 열기
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          </a>
+        </div>
+      </article>
+      <article class="card" data-system="PMS" data-card-id="pms-admin-code">
+        <a class="card__thumb" href="dist/pms-demo.html#/login?as=demo-admin&redirect=/admin/code" target="_blank" rel="noopener" title="공통코드 관리 열기">
+          <img src="assets/thumbnails/pms-admin-code.png" alt="공통코드 관리 썸네일" loading="lazy" />
+        </a>
+        <div class="card__body">
+          <div class="card__head">
+            <span class="badge badge--pms">PMS</span>
+            <h2 class="card__title">공통코드 관리</h2>
+          </div>
+          <p class="card__desc">관리자 화면 예시 — 4Depth 트리·순서 편집</p>
+          <a class="btn btn--primary card__open" href="dist/pms-demo.html#/login?as=demo-admin&redirect=/admin/code" target="_blank" rel="noopener">
+            새 창으로 열기
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          </a>
+        </div>
+      </article>
+      <article class="card" data-system="PMS" data-card-id="pms-admin-role">
+        <a class="card__thumb" href="dist/pms-demo.html#/login?as=demo-admin&redirect=/admin/role-group" target="_blank" rel="noopener" title="권한그룹 관리 열기">
+          <img src="assets/thumbnails/pms-admin-role.png" alt="권한그룹 관리 썸네일" loading="lazy" />
+        </a>
+        <div class="card__body">
+          <div class="card__head">
+            <span class="badge badge--pms">PMS</span>
+            <h2 class="card__title">권한그룹 관리</h2>
+          </div>
+          <p class="card__desc">관리자 화면 예시 — 메뉴 ACL·사용자 매핑</p>
+          <a class="btn btn--primary card__open" href="dist/pms-demo.html#/login?as=demo-admin&redirect=/admin/role-group" target="_blank" rel="noopener">
+            새 창으로 열기
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          </a>
+        </div>
+      </article>
+      <article class="card" data-system="PMS" data-card-id="pms-catalog">
+        <a class="card__thumb" href="dist/pms-demo.html#/login?as=demo-admin&redirect=/catalog" target="_blank" rel="noopener" title="PMS 컴포넌트 카탈로그 열기">
+          <img src="assets/thumbnails/pms-catalog.png" alt="PMS 컴포넌트 카탈로그 썸네일" loading="lazy" />
+        </a>
+        <div class="card__body">
+          <div class="card__head">
+            <span class="badge badge--pms">PMS</span>
+            <h2 class="card__title">PMS 컴포넌트 카탈로그</h2>
+          </div>
+          <p class="card__desc">디자인 토큰·공통 부품(버튼·입력·표·팝업·알약) 검수 화면</p>
+          <a class="btn btn--primary card__open" href="dist/pms-demo.html#/login?as=demo-admin&redirect=/catalog" target="_blank" rel="noopener">
+            새 창으로 열기
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          </a>
+        </div>
+      </article>
+      <article class="card" data-system="SRM" data-card-id="srm-partner-dashboard">
+        <a class="card__thumb" href="dist/srm-demo.html#/login?as=2148130217&redirect=/partner/dashboard" target="_blank" rel="noopener" title="협력업체 창구 메인 열기">
+          <img src="assets/thumbnails/srm-partner-dashboard.png" alt="협력업체 창구 메인 썸네일" loading="lazy" />
+        </a>
+        <div class="card__body">
+          <div class="card__head">
+            <span class="badge badge--srm">SRM</span>
+            <h2 class="card__title">협력업체 창구 메인</h2>
+          </div>
+          <p class="card__desc">협력업체 대시보드 예시 — 공지·진행 중 업무</p>
+          <a class="btn btn--primary card__open" href="dist/srm-demo.html#/login?as=2148130217&redirect=/partner/dashboard" target="_blank" rel="noopener">
+            새 창으로 열기
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          </a>
+        </div>
+      </article>
+      <article class="card" data-system="SRM" data-card-id="srm-partner-quote">
+        <a class="card__thumb" href="dist/srm-demo.html#/login?as=2148130217&redirect=/partner/quote" target="_blank" rel="noopener" title="협력업체 사전 견적 열기">
+          <img src="assets/thumbnails/srm-partner-quote.png" alt="협력업체 사전 견적 썸네일" loading="lazy" />
+        </a>
+        <div class="card__body">
+          <div class="card__head">
+            <span class="badge badge--srm">SRM</span>
+            <h2 class="card__title">협력업체 사전 견적</h2>
+          </div>
+          <p class="card__desc">협력업체 창구 — 견적 요청 목록·제출</p>
+          <a class="btn btn--primary card__open" href="dist/srm-demo.html#/login?as=2148130217&redirect=/partner/quote" target="_blank" rel="noopener">
+            새 창으로 열기
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          </a>
+        </div>
+      </article>
+      <article class="card" data-system="SRM" data-card-id="srm-partner-notice">
+        <a class="card__thumb" href="dist/srm-demo.html#/login?as=2148130217&redirect=/partner/notice" target="_blank" rel="noopener" title="협력업체 공지사항 열기">
+          <img src="assets/thumbnails/srm-partner-notice.png" alt="협력업체 공지사항 썸네일" loading="lazy" />
+        </a>
+        <div class="card__body">
+          <div class="card__head">
+            <span class="badge badge--srm">SRM</span>
+            <h2 class="card__title">협력업체 공지사항</h2>
+          </div>
+          <p class="card__desc">게시판 목록/열람 화면 예시</p>
+          <a class="btn btn--primary card__open" href="dist/srm-demo.html#/login?as=2148130217&redirect=/partner/notice" target="_blank" rel="noopener">
+            새 창으로 열기
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          </a>
+        </div>
+      </article>
+      <article class="card" data-system="SRM" data-card-id="srm-partner-qna">
+        <a class="card__thumb" href="dist/srm-demo.html#/login?as=2148130217&redirect=/partner/qna" target="_blank" rel="noopener" title="협력업체 질문과 답변 열기">
+          <img src="assets/thumbnails/srm-partner-qna.png" alt="협력업체 질문과 답변 썸네일" loading="lazy" />
+        </a>
+        <div class="card__body">
+          <div class="card__head">
+            <span class="badge badge--srm">SRM</span>
+            <h2 class="card__title">협력업체 질문과 답변</h2>
+          </div>
+          <p class="card__desc">게시판 + 리치 에디터 화면 예시</p>
+          <a class="btn btn--primary card__open" href="dist/srm-demo.html#/login?as=2148130217&redirect=/partner/qna" target="_blank" rel="noopener">
+            새 창으로 열기
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          </a>
+        </div>
+      </article>
+      <article class="card" data-system="SRM" data-card-id="srm-partner-profile">
+        <a class="card__thumb" href="dist/srm-demo.html#/login?as=2148130217&redirect=/partner/profile" target="_blank" rel="noopener" title="협력업체 정보 관리 열기">
+          <img src="assets/thumbnails/srm-partner-profile.png" alt="협력업체 정보 관리 썸네일" loading="lazy" />
+        </a>
+        <div class="card__body">
+          <div class="card__head">
+            <span class="badge badge--srm">SRM</span>
+            <h2 class="card__title">협력업체 정보 관리</h2>
+          </div>
+          <p class="card__desc">4탭 상세·담당자 관리 팝업 예시</p>
+          <a class="btn btn--primary card__open" href="dist/srm-demo.html#/login?as=2148130217&redirect=/partner/profile" target="_blank" rel="noopener">
+            새 창으로 열기
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          </a>
+        </div>
+      </article>
+      <article class="card" data-system="SRM" data-card-id="srm-rfq-request">
+        <a class="card__thumb" href="dist/srm-demo.html#/login?as=demo-business&redirect=/rfq/request" target="_blank" rel="noopener" title="사전 견적 요청 열기">
+          <img src="assets/thumbnails/srm-rfq-request.png" alt="사전 견적 요청 썸네일" loading="lazy" />
+        </a>
+        <div class="card__body">
+          <div class="card__head">
+            <span class="badge badge--srm">SRM</span>
+            <h2 class="card__title">사전 견적 요청</h2>
+          </div>
+          <p class="card__desc">절차(STEP) 입력 화면 예시</p>
+          <a class="btn btn--primary card__open" href="dist/srm-demo.html#/login?as=demo-business&redirect=/rfq/request" target="_blank" rel="noopener">
+            새 창으로 열기
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          </a>
+        </div>
+      </article>
+      <article class="card" data-system="SRM" data-card-id="srm-rfq-status">
+        <a class="card__thumb" href="dist/srm-demo.html#/login?as=demo-business&redirect=/rfq/status" target="_blank" rel="noopener" title="사전 견적 현황 열기">
+          <img src="assets/thumbnails/srm-rfq-status.png" alt="사전 견적 현황 썸네일" loading="lazy" />
+        </a>
+        <div class="card__body">
+          <div class="card__head">
+            <span class="badge badge--srm">SRM</span>
+            <h2 class="card__title">사전 견적 현황</h2>
+          </div>
+          <p class="card__desc">검색/조회 + 상세 화면 예시</p>
+          <a class="btn btn--primary card__open" href="dist/srm-demo.html#/login?as=demo-business&redirect=/rfq/status" target="_blank" rel="noopener">
+            새 창으로 열기
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          </a>
+        </div>
+      </article>
+      <article class="card" data-system="SRM" data-card-id="srm-order-request">
+        <a class="card__thumb" href="dist/srm-demo.html#/login?as=demo-business&redirect=/order-request" target="_blank" rel="noopener" title="발주계약 요청 열기">
+          <img src="assets/thumbnails/srm-order-request.png" alt="발주계약 요청 썸네일" loading="lazy" />
+        </a>
+        <div class="card__body">
+          <div class="card__head">
+            <span class="badge badge--srm">SRM</span>
+            <h2 class="card__title">발주계약 요청</h2>
+          </div>
+          <p class="card__desc">절차(STEP) 입력 화면 예시 — 체크리스트·품목·전자결재</p>
+          <a class="btn btn--primary card__open" href="dist/srm-demo.html#/login?as=demo-business&redirect=/order-request" target="_blank" rel="noopener">
+            새 창으로 열기
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          </a>
+        </div>
+      </article>
+      <article class="card" data-system="SRM" data-card-id="srm-order-request-status">
+        <a class="card__thumb" href="dist/srm-demo.html#/login?as=demo-business&redirect=/order-request/status" target="_blank" rel="noopener" title="발주계약 요청 현황 열기">
+          <img src="assets/thumbnails/srm-order-request-status.png" alt="발주계약 요청 현황 썸네일" loading="lazy" />
+        </a>
+        <div class="card__body">
+          <div class="card__head">
+            <span class="badge badge--srm">SRM</span>
+            <h2 class="card__title">발주계약 요청 현황</h2>
+          </div>
+          <p class="card__desc">검색/조회 화면 예시</p>
+          <a class="btn btn--primary card__open" href="dist/srm-demo.html#/login?as=demo-business&redirect=/order-request/status" target="_blank" rel="noopener">
+            새 창으로 열기
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          </a>
+        </div>
+      </article>
+      <article class="card" data-system="SRM" data-card-id="srm-order-plan-intake">
+        <a class="card__thumb" href="dist/srm-demo.html#/login?as=demo-contract&redirect=/order-plan/intake" target="_blank" rel="noopener" title="요청 접수 열기">
+          <img src="assets/thumbnails/srm-order-plan-intake.png" alt="요청 접수 썸네일" loading="lazy" />
+        </a>
+        <div class="card__body">
+          <div class="card__head">
+            <span class="badge badge--srm">SRM</span>
+            <h2 class="card__title">요청 접수</h2>
+          </div>
+          <p class="card__desc">계약담당자 접수 화면 예시</p>
+          <a class="btn btn--primary card__open" href="dist/srm-demo.html#/login?as=demo-contract&redirect=/order-plan/intake" target="_blank" rel="noopener">
+            새 창으로 열기
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          </a>
+        </div>
+      </article>
+      <article class="card" data-system="SRM" data-card-id="srm-order-plan">
+        <a class="card__thumb" href="dist/srm-demo.html#/login?as=demo-contract&redirect=/order-plan" target="_blank" rel="noopener" title="발주계획 등록 현황 열기">
+          <img src="assets/thumbnails/srm-order-plan.png" alt="발주계획 등록 현황 썸네일" loading="lazy" />
+        </a>
+        <div class="card__body">
+          <div class="card__head">
+            <span class="badge badge--srm">SRM</span>
+            <h2 class="card__title">발주계획 등록 현황</h2>
+          </div>
+          <p class="card__desc">검색/조회 화면 예시</p>
+          <a class="btn btn--primary card__open" href="dist/srm-demo.html#/login?as=demo-contract&redirect=/order-plan" target="_blank" rel="noopener">
+            새 창으로 열기
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          </a>
+        </div>
+      </article>
+      <article class="card" data-system="SRM" data-card-id="srm-bid-plan">
+        <a class="card__thumb" href="dist/srm-demo.html#/login?as=demo-contract&redirect=/bid/plan" target="_blank" rel="noopener" title="입찰계획 현황 열기">
+          <img src="assets/thumbnails/srm-bid-plan.png" alt="입찰계획 현황 썸네일" loading="lazy" />
+        </a>
+        <div class="card__body">
+          <div class="card__head">
+            <span class="badge badge--srm">SRM</span>
+            <h2 class="card__title">입찰계획 현황</h2>
+          </div>
+          <p class="card__desc">검색/조회 + STEP 등록 진입 예시</p>
+          <a class="btn btn--primary card__open" href="dist/srm-demo.html#/login?as=demo-contract&redirect=/bid/plan" target="_blank" rel="noopener">
+            새 창으로 열기
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          </a>
+        </div>
+      </article>
+      <article class="card" data-system="SRM" data-card-id="srm-base-item">
+        <a class="card__thumb" href="dist/srm-demo.html#/login?as=demo-admin&redirect=/base-info/item" target="_blank" rel="noopener" title="기준정보 › 품목 관리 열기">
+          <img src="assets/thumbnails/srm-base-item.png" alt="기준정보 › 품목 관리 썸네일" loading="lazy" />
+        </a>
+        <div class="card__body">
+          <div class="card__head">
+            <span class="badge badge--srm">SRM</span>
+            <h2 class="card__title">기준정보 › 품목 관리</h2>
+          </div>
+          <p class="card__desc">기준정보 목록/등록 화면 예시</p>
+          <a class="btn btn--primary card__open" href="dist/srm-demo.html#/login?as=demo-admin&redirect=/base-info/item" target="_blank" rel="noopener">
+            새 창으로 열기
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          </a>
+        </div>
+      </article>
+      <article class="card" data-system="SRM" data-card-id="srm-base-message">
+        <a class="card__thumb" href="dist/srm-demo.html#/login?as=demo-admin&redirect=/base-info/message-template" target="_blank" rel="noopener" title="기준정보 › 메시지 템플릿 열기">
+          <img src="assets/thumbnails/srm-base-message.png" alt="기준정보 › 메시지 템플릿 썸네일" loading="lazy" />
+        </a>
+        <div class="card__body">
+          <div class="card__head">
+            <span class="badge badge--srm">SRM</span>
+            <h2 class="card__title">기준정보 › 메시지 템플릿</h2>
+          </div>
+          <p class="card__desc">기준정보 목록/편집 화면 예시</p>
+          <a class="btn btn--primary card__open" href="dist/srm-demo.html#/login?as=demo-admin&redirect=/base-info/message-template" target="_blank" rel="noopener">
+            새 창으로 열기
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          </a>
+        </div>
+      </article>
+      <article class="card" data-system="SRM" data-card-id="srm-partner-mgmt">
+        <a class="card__thumb" href="dist/srm-demo.html#/login?as=demo-admin&redirect=/partner-mgmt" target="_blank" rel="noopener" title="협력업체 관리 열기">
+          <img src="assets/thumbnails/srm-partner-mgmt.png" alt="협력업체 관리 썸네일" loading="lazy" />
+        </a>
+        <div class="card__body">
+          <div class="card__head">
+            <span class="badge badge--srm">SRM</span>
+            <h2 class="card__title">협력업체 관리</h2>
+          </div>
+          <p class="card__desc">관리자 목록/상세 화면 예시</p>
+          <a class="btn btn--primary card__open" href="dist/srm-demo.html#/login?as=demo-admin&redirect=/partner-mgmt" target="_blank" rel="noopener">
+            새 창으로 열기
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          </a>
+        </div>
+      </article>
+      <article class="card" data-system="SRM" data-card-id="srm-partner-mgmt-request">
+        <a class="card__thumb" href="dist/srm-demo.html#/login?as=demo-admin&redirect=/partner-mgmt/request" target="_blank" rel="noopener" title="협력업체 신청 관리 열기">
+          <img src="assets/thumbnails/srm-partner-mgmt-request.png" alt="협력업체 신청 관리 썸네일" loading="lazy" />
+        </a>
+        <div class="card__body">
+          <div class="card__head">
+            <span class="badge badge--srm">SRM</span>
+            <h2 class="card__title">협력업체 신청 관리</h2>
+          </div>
+          <p class="card__desc">승인 처리 화면 예시 — 상태 알약</p>
+          <a class="btn btn--primary card__open" href="dist/srm-demo.html#/login?as=demo-admin&redirect=/partner-mgmt/request" target="_blank" rel="noopener">
+            새 창으로 열기
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          </a>
+        </div>
+      </article>
+      <article class="card" data-system="SRM" data-card-id="srm-notice">
+        <a class="card__thumb" href="dist/srm-demo.html#/login?as=demo-admin&redirect=/notice" target="_blank" rel="noopener" title="공지사항 관리 열기">
+          <img src="assets/thumbnails/srm-notice.png" alt="공지사항 관리 썸네일" loading="lazy" />
+        </a>
+        <div class="card__body">
+          <div class="card__head">
+            <span class="badge badge--srm">SRM</span>
+            <h2 class="card__title">공지사항 관리</h2>
+          </div>
+          <p class="card__desc">게시판 관리 화면 예시</p>
+          <a class="btn btn--primary card__open" href="dist/srm-demo.html#/login?as=demo-admin&redirect=/notice" target="_blank" rel="noopener">
+            새 창으로 열기
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          </a>
+        </div>
+      </article>
+      <article class="card" data-system="SRM" data-card-id="srm-admin-user">
+        <a class="card__thumb" href="dist/srm-demo.html#/login?as=demo-admin&redirect=/admin/user" target="_blank" rel="noopener" title="사용자 관리 열기">
+          <img src="assets/thumbnails/srm-admin-user.png" alt="사용자 관리 썸네일" loading="lazy" />
+        </a>
+        <div class="card__body">
+          <div class="card__head">
+            <span class="badge badge--srm">SRM</span>
+            <h2 class="card__title">사용자 관리</h2>
+          </div>
+          <p class="card__desc">관리자 화면 예시</p>
+          <a class="btn btn--primary card__open" href="dist/srm-demo.html#/login?as=demo-admin&redirect=/admin/user" target="_blank" rel="noopener">
+            새 창으로 열기
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          </a>
+        </div>
+      </article>
+      <article class="card" data-system="SRM" data-card-id="srm-admin-stats-login">
+        <a class="card__thumb" href="dist/srm-demo.html#/login?as=demo-admin&redirect=/admin/stats/login" target="_blank" rel="noopener" title="로그인 현황 열기">
+          <img src="assets/thumbnails/srm-admin-stats-login.png" alt="로그인 현황 썸네일" loading="lazy" />
+        </a>
+        <div class="card__body">
+          <div class="card__head">
+            <span class="badge badge--srm">SRM</span>
+            <h2 class="card__title">로그인 현황</h2>
+          </div>
+          <p class="card__desc">통계 화면 예시 — 기간 조회·차트·엑셀</p>
+          <a class="btn btn--primary card__open" href="dist/srm-demo.html#/login?as=demo-admin&redirect=/admin/stats/login" target="_blank" rel="noopener">
+            새 창으로 열기
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          </a>
+        </div>
+      </article>
+      <article class="card" data-system="SRM" data-card-id="srm-catalog">
+        <a class="card__thumb" href="dist/srm-demo.html#/login?as=demo-admin&redirect=/catalog" target="_blank" rel="noopener" title="SRM 컴포넌트 카탈로그 열기">
+          <img src="assets/thumbnails/srm-catalog.png" alt="SRM 컴포넌트 카탈로그 썸네일" loading="lazy" />
+        </a>
+        <div class="card__body">
+          <div class="card__head">
+            <span class="badge badge--srm">SRM</span>
+            <h2 class="card__title">SRM 컴포넌트 카탈로그</h2>
+          </div>
+          <p class="card__desc">디자인 토큰·공통 부품 검수 화면</p>
+          <a class="btn btn--primary card__open" href="dist/srm-demo.html#/login?as=demo-admin&redirect=/catalog" target="_blank" rel="noopener">
+            새 창으로 열기
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          </a>
+        </div>
+      </article>
+    </div>
+  </main>
+
+  <footer class="foot">© 2026 KEPCO Energy Solution Co., Ltd. All Rights Reserved.</footer>
+  <script src="js/portal.js"></script>
+</body>
+</html>

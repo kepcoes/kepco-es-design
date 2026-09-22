@@ -1,0 +1,179 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   디자인/퍼블리싱 가이드 포털 — 색·글꼴·여백은 전부 tokens.css(앱과 같은 파일)에서 가져온다.
+   리터럴 색을 쓰지 않는다(디자인 토큰 미커버 목록: common/docs/design-token-gaps.md).
+   ═══════════════════════════════════════════════════════════════════════════ */
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: var(--kes-bg-page);
+  color: var(--kes-text-body);
+  font: var(--kes-font-body-14m);
+  font-weight: var(--kes-fw-regular);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+a { color: inherit; text-decoration: none; }
+img { display: block; max-width: 100%; }
+
+/* ── 상단 ── */
+.top {
+  background: var(--kes-bg-base);
+  border-bottom: 1px solid var(--kes-border);
+}
+.top__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 14px 24px;
+}
+.top__brand { display: inline-flex; align-items: center; gap: 14px; }
+.top__logo { height: 26px; }
+.top__title { color: var(--kes-text-strong); font: var(--kes-font-h2); }
+.crumb { display: inline-flex; align-items: center; gap: 8px; color: var(--kes-text-secondary); font: var(--kes-font-body-13r); }
+.crumb__sep { color: var(--kes-text-tertiary); }
+.crumb__now { color: var(--kes-text-body); font-weight: var(--kes-fw-medium); }
+
+/* ── 본문 ── */
+.main {
+  flex: 1;
+  width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 24px 24px 40px;
+}
+.toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  padding: 16px 20px;
+  border: 1px solid var(--kes-border-subtle);
+  border-radius: 12px;
+  background: var(--kes-bg-base);
+}
+.toolbar__guide { display: flex; flex-direction: column; gap: 4px; }
+.toolbar__guide strong { color: var(--kes-text-strong); font: var(--kes-font-body-16b); }
+.toolbar__guide span { color: var(--kes-text-secondary); font: var(--kes-font-body-13r); }
+.toolbar__right { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.toolbar__status { color: var(--kes-blue-main); font: var(--kes-font-body-13m); min-height: 1em; }
+.note {
+  margin: 14px 0 20px;
+  padding: 12px 16px;
+  border-radius: 8px;
+  background: var(--kes-blue-bg4);
+  color: var(--kes-text-muted);
+  font: var(--kes-font-body-13r);
+  line-height: 1.6;
+}
+.note b { color: var(--kes-text-body); font-weight: var(--kes-fw-medium); }
+.note code {
+  padding: 1px 6px;
+  border-radius: 4px;
+  background: var(--kes-bg-base);
+  border: 1px solid var(--kes-border);
+  font-size: 12px;
+}
+
+/* ── 버튼 — 앱 공통 버튼(fill 기본 blue/sub, hover blue/main, 높이 36) ── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  height: 36px;
+  padding: 0 16px;
+  border: 1px solid var(--kes-border);
+  border-radius: 6px;
+  background: var(--kes-bg-base);
+  color: var(--kes-text-body);
+  font: var(--kes-font-body-14m);
+  cursor: pointer;
+  transition: background-color var(--kes-dur-fast, 0.12s) ease, border-color var(--kes-dur-fast, 0.12s) ease;
+}
+.btn:hover { background: var(--kes-grey-50); }
+.btn--primary { background: var(--kes-blue-sub); border-color: var(--kes-blue-sub); color: var(--kes-text-inverse); }
+.btn--primary:hover { background: var(--kes-blue-main); border-color: var(--kes-blue-main); }
+.btn:focus-visible { outline: 2px solid var(--kes-blue-300); outline-offset: 2px; }
+
+/* 세그먼트(필터) */
+.seg { display: inline-flex; border: 1px solid var(--kes-border); border-radius: 6px; overflow: hidden; background: var(--kes-bg-base); }
+.seg__btn {
+  height: 34px; padding: 0 14px; border: 0; background: transparent;
+  color: var(--kes-text-muted); font: var(--kes-font-body-13m); cursor: pointer;
+}
+.seg__btn + .seg__btn { border-left: 1px solid var(--kes-border); }
+.seg__btn.is-on { background: var(--kes-blue-bg2); color: var(--kes-blue-main); }
+
+/* ── 카드 그리드 ── */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 20px;
+}
+@media (max-width: 1400px) { .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (max-width: 1000px) { .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 640px) { .grid { grid-template-columns: 1fr; } .top__inner, .main { padding-left: 16px; padding-right: 16px; } }
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--kes-border-subtle);
+  border-radius: 12px;
+  background: var(--kes-bg-base);
+  overflow: hidden;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.02));
+  transition: transform var(--kes-dur-fast, 0.12s) ease, box-shadow var(--kes-dur-fast, 0.12s) ease;
+}
+.card:hover { box-shadow: 0 6px 18px rgba(16, 43, 119, 0.08); }
+.card.is-hidden { display: none; }
+.card.is-dragging { opacity: 0.5; }
+.card.is-over { outline: 2px dashed var(--kes-blue-300); outline-offset: -2px; }
+.card__thumb {
+  display: block;
+  aspect-ratio: 16 / 10;
+  background: var(--kes-bluegrey-50);
+  border-bottom: 1px solid var(--kes-border-subtle);
+  overflow: hidden;
+}
+.card__thumb img { width: 100%; height: 100%; object-fit: cover; object-position: top left; }
+.card__body { display: flex; flex-direction: column; gap: 8px; padding: 14px 16px 16px; }
+.card__head { display: flex; align-items: center; gap: 8px; min-width: 0; }
+.card__title { margin: 0; color: var(--kes-text-strong); font: var(--kes-font-body-16b); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.card__desc { margin: 0; color: var(--kes-text-secondary); font: var(--kes-font-body-13r); line-height: 1.5; min-height: 2.9em; }
+.card__open { margin-top: 4px; width: 100%; }
+
+/* 시스템 뱃지 — 앱 헤더 시스템 뱃지와 같은 색 */
+.badge {
+  display: inline-flex; align-items: center; height: 20px; padding: 0 8px;
+  border-radius: var(--kes-radius-pill); font: var(--kes-font-body-13b); font-size: 11px; letter-spacing: 0.02em;
+}
+.badge--pms { background: var(--kes-blue-100); color: var(--kes-blue-main); }
+.badge--srm { background: var(--kes-green-100, #dcfce7); color: var(--kes-green-700, #15803d); }
+
+/* 이동 핸들 */
+.card__handle {
+  position: absolute; top: 10px; right: 10px;
+  width: 32px; height: 32px;
+  display: inline-flex; align-items: center; justify-content: center;
+  border: 1px solid var(--kes-border); border-radius: 8px;
+  background: var(--kes-bg-base); color: var(--kes-text-tertiary);
+  cursor: grab;
+}
+.card__handle:active { cursor: grabbing; }
+.card__handle:focus-visible { outline: 2px solid var(--kes-blue-300); }
+
+/* ── 푸터 ── */
+.foot {
+  padding: 20px;
+  text-align: center;
+  color: var(--kes-text-footer);
+  font: var(--kes-font-body-13r);
+  border-top: 1px solid var(--kes-border);
+  background: var(--kes-bg-base);
+}
