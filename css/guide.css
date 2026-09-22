@@ -130,7 +130,53 @@ img { display: block; max-width: 100%; }
   filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.02));
   transition: transform var(--kes-dur-fast, 0.12s) ease, box-shadow var(--kes-dur-fast, 0.12s) ease;
 }
-.card:hover { box-shadow: 0 6px 18px rgba(16, 43, 119, 0.08); }
+/* 마우스 오버 — 카드가 살짝 뜨고(−4px) 테두리·제목이 파랗게, 썸네일은 천천히 확대 + '열어 보기' 알약 (2026-09-22) */
+.card { transition: transform 0.22s ease, filter 0.22s ease, border-color 0.22s ease; }
+.card:hover, .card:focus-within {
+  transform: translateY(-4px);
+  border-color: var(--kes-blue-300);
+  filter: drop-shadow(0 10px 22px rgba(16, 43, 119, 0.14));
+}
+.card:hover .card__title, .card:focus-within .card__title { color: var(--kes-blue-main); }
+.card__thumb { position: relative; }
+.card__thumb img { transition: transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1); will-change: transform; }
+.card:hover .card__thumb img, .card:focus-within .card__thumb img { transform: scale(1.05); }
+/* 썸네일 위 안내 알약 — 오버에서만 아래에서 올라오며 나타난다 */
+.card__thumb::after {
+  content: '화면 열어 보기 ↗';
+  position: absolute;
+  left: 50%;
+  bottom: 14px;
+  padding: 7px 14px;
+  border-radius: 99px;
+  background: rgba(16, 43, 119, 0.86);
+  color: #fff;
+  font: var(--kes-font-body-13b);
+  white-space: nowrap;
+  opacity: 0;
+  transform: translate(-50%, 8px);
+  transition: opacity 0.2s ease, transform 0.25s ease;
+  pointer-events: none;
+}
+.card:hover .card__thumb::after, .card:focus-within .card__thumb::after { opacity: 1; transform: translate(-50%, 0); }
+/* 썸네일 아래쪽을 살짝 어둡게 — 알약이 어느 화면에서도 읽히게 */
+.card__thumb::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(16, 43, 119, 0) 55%, rgba(16, 43, 119, 0.22) 100%);
+  opacity: 0;
+  transition: opacity 0.22s ease;
+  pointer-events: none;
+}
+.card:hover .card__thumb::before, .card:focus-within .card__thumb::before { opacity: 1; }
+.card__open { transition: background-color 0.15s ease, border-color 0.15s ease, transform 0.15s ease; }
+.card__open:active { transform: scale(0.98); }
+@media (prefers-reduced-motion: reduce) {
+  .card, .card__thumb img, .card__thumb::after, .card__thumb::before, .card__open { transition: none; }
+  .card:hover { transform: none; }
+  .card:hover .card__thumb img { transform: none; }
+}
 .card.is-hidden { display: none; }
 .card.is-dragging { opacity: 0.5; }
 .card.is-over { outline: 2px dashed var(--kes-blue-300); outline-offset: -2px; }
