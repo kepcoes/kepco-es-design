@@ -154,7 +154,7 @@ img { display: block; max-width: 100%; }
   border-radius: var(--kes-radius-pill); font: var(--kes-font-body-13b); font-size: 11px; letter-spacing: 0.02em;
 }
 .badge--pms { background: var(--kes-blue-100); color: var(--kes-blue-main); }
-.badge--srm { background: var(--kes-green-100, #dcfce7); color: var(--kes-green-700, #15803d); }
+.badge--srm { background: var(--kes-point-green-bg); color: var(--kes-point-green); }
 
 /* 이동 핸들 */
 .card__handle {
