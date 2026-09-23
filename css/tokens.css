@@ -61,7 +61,7 @@
   /* Line — 구분선 (3) */
   --kes-line-ddd: #d2d2d2;             /* line/ddd — 기본 테두리
                                         *   ※ line/table_grey(#DFDFDF) 흡수 */
-  --kes-line-table-grey: #dfdfdf;      /* line/table_grey — 비활성 체크박스 바탕(1067:41827)에만 쓴다.
+  --kes-line-table-grey: #dfdfdf;      /* line/table_grey — 비활성 체크박스 바탕(1067:41827) · 버튼 disabled 바탕(1219:46940, 리뷰 5차).
                                         *   테두리는 여전히 line/ddd 로 흡수(2026-09-17 사용자 결정) */
   --kes-line-table-bluegrey: #c5cee2;  /* line/table_bluegrey — 테이블 헤더/강조 라인
                                         *   ※ 계열이 달라(블루그레이) 별도 유지 */
