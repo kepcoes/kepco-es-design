@@ -142,8 +142,7 @@ img { display: block; max-width: 100%; }
 .card__thumb img { transition: transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1); will-change: transform; }
 .card:hover .card__thumb img, .card:focus-within .card__thumb img { transform: scale(1.05); }
 /* 썸네일 위 안내 알약 — 오버에서만 아래에서 올라오며 나타난다 */
-.card:hover .card__thumb::after, .card:focus-within /* 썸네일 아래쪽을 살짝 어둡게 — 알약이 어느 화면에서도 읽히게 */
-.card:hover .card__thumb::before, .card:focus-within .card__open { transition: background-color 0.15s ease, border-color 0.15s ease, transform 0.15s ease; }
+.card__open { transition: background-color 0.15s ease, border-color 0.15s ease, transform 0.15s ease; }
 .card__open:active { transform: scale(0.98); }
 @media (prefers-reduced-motion: reduce) {
   .card, .card__thumb img, .card__open { transition: none; }
