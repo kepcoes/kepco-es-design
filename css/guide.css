@@ -192,7 +192,32 @@ img { display: block; max-width: 100%; }
 .card__head { display: flex; align-items: center; gap: 8px; min-width: 0; }
 .card__title { margin: 0; color: var(--kes-text-strong); font: var(--kes-font-body-16b); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .card__desc { margin: 0; color: var(--kes-text-secondary); font: var(--kes-font-body-13r); line-height: 1.5; min-height: 2.9em; }
-.card__open { margin-top: 4px; width: 100%; }
+/* [새 창으로 열기] — SRM 로그인 버튼과 같은 파랑 그라데이션(#1D4ED8 → #4BB4FF), hover 때 좌→우로 흐름(사용자 2026-09-23: 단색 파랑이 너무 많다) */
+.card__open {
+  margin-top: 4px;
+  width: 100%;
+  border: 0;
+  color: var(--kes-white);
+  background: linear-gradient(97deg, var(--kes-blue-main) 0%, #4bb4ff 50%, var(--kes-blue-main) 100%);
+  background-size: 200% 100%;
+  background-position: 0% 0;
+  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 5%);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.card__open:hover {
+  background-color: transparent;
+  border-color: transparent;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 14px rgb(0 0 0 / 10%);
+  animation: card-open-flow 1.8s linear infinite;
+}
+@keyframes card-open-flow {
+  from { background-position: 0% 0; }
+  to { background-position: 200% 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .card__open:hover { animation: none; transform: none; filter: brightness(1.06); }
+}
 
 /* 시스템 뱃지 — 앱 헤더 시스템 뱃지와 같은 색 */
 .badge {
